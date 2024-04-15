@@ -1,6 +1,6 @@
 # Office Space React App
 
-The purpose of this application is to manage office space. It will allow users to create and manage offices, view office details and occupants, and manage office workers.
+The purpose of this application is to manage office space. It will allow users to create and manage offices, view office details and occupants and manage office workers.
 
 ## Installation
 
