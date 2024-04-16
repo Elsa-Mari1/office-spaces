@@ -1,16 +1,24 @@
 import React from "react";
-import Office from "./Office";
+import OfficeBlock from "./OfficeBlock";
 import { Typography, IconButton } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import companyDetails from "../data/CompanyData"; // Adjust the path as needed
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const handleClick = (companyId) => {
+    // Redirect to the component with the specific company details as input
+    console.log("companyId", companyId);
+    navigate(`/office/${companyId}`);
+  };
+
   return (
     <Box sx={{ padding: "10px" }}>
       <Typography variant="h2">All Offices</Typography>
-      {Object.values(companyDetails).map((company, index) => (
+      {Object.entries(companyDetails).map(([companyId, company], index) => (
         <Box
           key={index}
           sx={{
@@ -20,8 +28,9 @@ const Home = () => {
             borderRadius: "8px", // Curve the sides
             margin: "10px", // Add space around the outside of the box
           }}
+          onClick={() => handleClick(companyId)}
         >
-          <Office
+          <OfficeBlock
             heading={company.heading}
             telephone={company.telephone}
             email={company.email}
