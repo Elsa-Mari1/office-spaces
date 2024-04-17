@@ -52,7 +52,11 @@ const OfficeBlock = ({
           container
           item
           xs={12}
-          sx={{ display: "flex", justifyContent: "space-between" }}
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            margin: "10px",
+          }}
         >
           <Typography variant="h4">{heading}</Typography>
           <CreateIcon onClick={handleCreateIconClick} cursor="pointer" />
@@ -66,6 +70,7 @@ const OfficeBlock = ({
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "center",
+            gap: 1,
           }}
         >
           <img src="/images/members.svg" alt="members svg" />
@@ -96,19 +101,34 @@ const OfficeBlock = ({
 
         <AccordionDetails>
           <Box display="flex" flexDirection="column" width="100%">
-            <Box display="flex" alignItems="center" paddingBottom="10px">
+            <Box
+              display="flex"
+              alignItems="center"
+              paddingBottom="10px"
+              sx={{ gap: 1 }}
+            >
               <PhoneIcon />
               <Typography>{telephone}</Typography>
             </Box>
-            <Box display="flex" alignItems="center" paddingBottom="10px">
+            <Box
+              display="flex"
+              alignItems="center"
+              paddingBottom="10px"
+              sx={{ gap: 1 }}
+            >
               <EmailIcon />
               <Typography>{email}</Typography>
             </Box>
-            <Box display="flex" alignItems="center" paddingBottom="10px">
+            <Box
+              display="flex"
+              alignItems="center"
+              paddingBottom="10px"
+              sx={{ gap: 1 }}
+            >
               <BusinessIcon />
               <Typography>Office Capacity: {officeCapacity}</Typography>
             </Box>
-            <Box display="flex" alignItems="center">
+            <Box display="flex" alignItems="center" sx={{ gap: 1 }}>
               <LocationOnIcon />
               <Typography>{location}</Typography>
             </Box>

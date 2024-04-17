@@ -9,9 +9,11 @@ import { appTheme } from "./themes/theme";
 
 const App = () => {
   return (
-    <ThemeProvider theme={appTheme}>
+    // <ThemeProvider theme={appTheme}>
+    <Box>
       <RoutesFunc />
-    </ThemeProvider>
+    </Box>
+    // {/* </ThemeProvider> */}
   );
 };
 

@@ -26,7 +26,9 @@ const Home = () => {
             paddingLeft: 2, // Add some padding to separate the content from the border
             marginBottom: 2, // Add some margin bottom between boxes
             borderRadius: "8px", // Curve the sides
-            margin: "10px", // Add space around the outside of the box
+            margin: "20px 20px 40px 20px", // Add space around the outside of the box
+            marginBottom: "40px",
+            boxShadow: "0 0 10px #999",
           }}
           onClick={() => handleClick(companyId)}
         >
@@ -46,7 +48,7 @@ const Home = () => {
           bottom: 16,
           right: 16,
           fontSize: 70, // Adjust the size of the icon as needed
-          color: "primary.contrastText", // Use the primary color for the icon
+          //   color: "primary.contrastText", // Use the primary color for the icon
           cursor: "pointer", // Show pointer cursor on hover
         }}
         onClick={() => {

@@ -37,16 +37,35 @@ const NavBar = () => {
         <Toolbar>
           <Grid container alignItems="center">
             {/* Left-aligned icons */}
-            <Grid item xs={6} sx={{ display: "inline-flex" }}>
-              <Typography>{currentHour}</Typography>
-              <ChatIcon />
+            <Grid
+              item
+              xs={6}
+              sx={{
+                display: "inline-flex",
+                alignItems: "left",
+                justifyContent: "left",
+                alignItems: "center",
+              }}
+            >
+              <Typography variant="h6" color="textPrimary">
+                {currentHour}{" "}
+              </Typography>
+              <IconButton>
+                <ChatIcon color="inherit" />
+              </IconButton>
             </Grid>
 
             {/* Right-aligned icons */}
             <Grid item xs={6} container justifyContent="flex-end">
-              <VolumeDownIcon />
-              <LocationOnIcon />
-              <PhoneInTalkIcon />
+              <IconButton>
+                <VolumeDownIcon color="inherit" />
+              </IconButton>
+              <IconButton>
+                <LocationOnIcon color="inherit" />
+              </IconButton>
+              <IconButton>
+                <PhoneInTalkIcon color="inherit" />
+              </IconButton>
             </Grid>
           </Grid>
         </Toolbar>

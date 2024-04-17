@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import OfficeBlock from "./OfficeBlock";
 import { Typography, IconButton, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid";
@@ -11,8 +11,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
+import NewStaffmemberModal from "./NewStaffmemberModal";
 
 const Office = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   const { companyId } = useParams();
   const navigate = useNavigate();
   const handleHomeButton = (companyId) => {
@@ -56,7 +60,7 @@ const Office = () => {
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          popupIcon={<SearchIcon />}
+          //   popupIcon={<SearchIcon sx={{ transform: 'none'}}/>}
           options={selectedCompany.members.map((member) => member.name)}
           sx={{ width: "100%", marginBottom: "10px" }}
           renderInput={(params) => <TextField {...params} label="Search" />}
@@ -73,9 +77,18 @@ const Office = () => {
       {selectedCompany.members.map((member) => (
         <Grid container alignItems="center">
           {/* Left-aligned icons */}
-          <Grid item xs={6} sx={{ display: "inline-flex" }}>
+          <Grid
+            item
+            xs={6}
+            sx={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 1,
+              padding: "5px",
+            }}
+          >
             <img src={member.icon} alt="members svg" />
-            <Typography>{member.name}</Typography>
+            <Typography variant="h6">{member.name}</Typography>
           </Grid>
 
           {/* Right-aligned icons */}
@@ -90,14 +103,16 @@ const Office = () => {
           bottom: 16,
           right: 16,
           fontSize: 70, // Adjust the size of the icon as needed
-          color: "primary.contrastText", // Use the primary color for the icon
+          //   color: "primary.contrastText", // Use the primary color for the icon
           cursor: "pointer", // Show pointer cursor on hover
         }}
         onClick={() => {
           // Add your onClick logic here
+          openModal();
           console.log("Button clicked!");
         }}
       />
+      <NewStaffmemberModal isOpen={isModalOpen} onClose={closeModal} />
     </Box>
   );
 };
