@@ -41,6 +41,7 @@ const OfficeBlock = ({
   const handleCreateIconClick = (event) => {
     // Stop event propagation to prevent it from triggering onClick of the parent Box
     event.stopPropagation();
+    handleClick();
     console.log("pencil clicked");
     // Additional logic for CreateIcon click if needed
   };

@@ -7,10 +7,21 @@ import companyDetails from "../data/CompanyData"; // Adjust the path as needed
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useNavigate } from "react-router-dom";
 import AddOffice from "./AddOffice";
+import EditOffice from "./EditOffice";
 
 const Home = () => {
   const [data, setData] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentCompanyId, setCurrentCompanyId] = useState("");
+  const [officeData, setOfficeData] = useState({
+    officeName: "",
+    physicalAddress: "",
+    emailAddress: "",
+    phoneNumber: "",
+    maxCapacity: null,
+    selectedColor: null,
+  });
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const navigate = useNavigate();
@@ -20,22 +31,51 @@ const Home = () => {
     navigate(`/office/${companyId}`);
   };
   console.log("data", data);
-  console.log("Object.entries(data)", Object.entries(data));
+  //   console.log("data", data);
+  //   console.log("Object.entries(data)", Object.entries(data));
   useEffect(() => {
     setData(companyDetails);
   }, [companyDetails]);
-  console.log("companyDetails", companyDetails);
-  console.log(
-    "kyk",
-    Object.entries(data).map(([companyId, company], index) => company.members)
-  );
+
+  // Function to show the modal
+  const handleOpenModal = (companyId) => {
+    // Find the company data based on the companyId
+    const currentCompany = data[companyId];
+    // Set the officeData state with the current company data
+    setOfficeData(currentCompany);
+    // Open the modal
+    setModalOpen(true);
+  };
 
   // Function to add a new office to companyDetails
   const handleAddOffice = (newOffice) => {
     const newId = Object.keys(data).length;
+    console.log("newOffice", newOffice);
+    console.log("newId", newId);
     data[newId] = newOffice;
     // You may need to update state if companyDetails is stored in state
     setData({ ...data, [newId]: newOffice });
+  };
+  console.log("currentCompanyId", currentCompanyId);
+  const handleUpdateOffice = (updatedOffice) => {
+    // Get the id of the office to update
+    const officeId = currentCompanyId;
+    console.log("officeId", officeId);
+    // Check if the office with the provided id exists in the data state
+    // if (data.hasOwnProperty(officeId)) {
+    // Copy the current data state
+    const updatedData = { ...data };
+    // Update the office data using the office id as key
+    console.log("updatedData", updatedData);
+    console.log("updatedOffice", updatedOffice);
+    console.log("updatedData[officeId]", updatedData[officeId]);
+    updatedData[officeId] = updatedOffice;
+
+    // Update the state with the updated data
+    setData(updatedData);
+    // } else {
+    //   console.error(`Office with id ${officeId} does not exist.`);
+    // }
   };
 
   return (
@@ -53,7 +93,11 @@ const Home = () => {
             marginBottom: "40px",
             boxShadow: "0 0 10px #999",
           }}
-          onClick={() => handleClick(companyId)}
+          onClick={() => {
+            setCurrentCompanyId(companyId);
+            handleClick(companyId);
+            handleOpenModal(companyId);
+          }}
         >
           <OfficeBlock
             heading={company.heading}
@@ -62,6 +106,10 @@ const Home = () => {
             officeCapacity={company.officeCapacity}
             location={company.location}
             numberMembers={company.members.length}
+            handleClick={() => {
+              handleOpenModal(companyId);
+              setCurrentCompanyId(companyId);
+            }}
           />
         </Box>
       ))}
@@ -83,6 +131,12 @@ const Home = () => {
         isOpen={isModalOpen}
         onClose={closeModal}
         onAddOffice={handleAddOffice}
+      />
+      <EditOffice
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        officeData={officeData} // Pass officeData to EditOffice
+        onUpdateOffice={handleUpdateOffice}
       />
     </Box>
   );
