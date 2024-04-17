@@ -12,7 +12,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import NewStaffmemberModal from "./NewStaffmemberModal";
-import EditStaffMemberModal from "./EditStaffMemberModal";
+// import EditOffice from "./EditOffice";
 import EditDeleteStaffMemberModal from "./EditDeleteStaffMemberModal";
 
 const Office = () => {
