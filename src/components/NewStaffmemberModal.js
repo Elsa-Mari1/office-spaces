@@ -7,11 +7,9 @@ import Button from "@mui/material/Button";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
-// import Slider from "react-slick";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 // Custom styling for the Button component
 const CustomButton = styled(Button)({
-  // Add your custom styles here
   backgroundColor: "#007bff", // Example background color
   color: "white", // Example text color
   borderRadius: "20px", // Set the border radius
@@ -21,26 +19,66 @@ const CustomButton = styled(Button)({
   },
 });
 
-const NewStaffmemberModal = ({ isOpen, onClose }) => {
-  const [currentPage, setCurrentPage] = useState(1); // Track current page of the modal
+const NewStaffmemberModal = ({
+  isOpen,
+  onClose,
+  onAddMember,
+  handleModalClose,
+}) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
+
+  const handleAddMember = () => {
+    // Check if all required fields are filled
+    if (
+      firstName.trim() === "" ||
+      lastName.trim() === "" ||
+      selectedAvatar === null
+    ) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    // Create new member object
+    const newMember = {
+      name: `${firstName} ${lastName}`,
+      icon: selectedAvatar,
+    };
+
+    // Pass new member data to parent component
+    onAddMember(newMember);
+
+    // Clear input fields
+    setFirstName("");
+    setLastName("");
+    setSelectedAvatar(null);
+
+    // Close the modal
+    onClose();
+    //set modal page to one
+    setCurrentPage(1);
+  };
 
   const handleNextPage = () => {
     setCurrentPage(2); // Move to the second page
   };
   const handleBackPage = () => {
-    setCurrentPage(1); // Move to the second page
+    setCurrentPage(1); // Move to the 1st page
   };
 
   // Array of SVG file names
   const svgImages = [
-    "balloon_man.svg",
-    "baseball_man.svg",
-    "flying_man.svg",
-    "moon_man.svg",
-    "one_balloon_man.svg",
-    "planet_man.svg",
-    "rocket_man.svg",
+    { label: "Avatar 1", value: "/images/balloon_man.svg" },
+    { label: "Avatar 2", value: "/images/baseball_man.svg" },
+    { label: "Avatar 3", value: "/images/flying_man.svg" },
+    { label: "Avatar 4", value: "/images/moon_man.svg" },
+    { label: "Avatar 5", value: "/images/one_balloon_man.svg" },
+    { label: "Avatar 6", value: "/images/planet_man.svg" },
+    { label: "Avatar 7", value: "/images/rocket_man.svg" },
   ];
+
   return (
     <Modal
       open={isOpen}
@@ -71,7 +109,11 @@ const NewStaffmemberModal = ({ isOpen, onClose }) => {
                 </Grid>
                 <Grid item xs={6} container justifyContent="flex-end">
                   <HighlightOffIcon
-                    onClick={onClose}
+                    onClick={() => {
+                      onClose();
+                      handleModalClose();
+                      setCurrentPage(1);
+                    }}
                     sx={{ cursor: "pointer" }}
                   />
                 </Grid>
@@ -84,6 +126,8 @@ const NewStaffmemberModal = ({ isOpen, onClose }) => {
                     variant="outlined"
                     sx={{ display: "block" }}
                     fullWidth
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -93,6 +137,8 @@ const NewStaffmemberModal = ({ isOpen, onClose }) => {
                     variant="outlined"
                     sx={{ display: "block" }}
                     fullWidth
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                   />
                 </Grid>
               </Grid>
@@ -148,7 +194,11 @@ const NewStaffmemberModal = ({ isOpen, onClose }) => {
                 </Grid>
                 <Grid item xs={3} container justifyContent="flex-end">
                   <HighlightOffIcon
-                    onClick={onClose}
+                    onClick={() => {
+                      onClose();
+                      handleModalClose();
+                      setCurrentPage(1);
+                    }}
                     sx={{ cursor: "pointer" }}
                   />
                 </Grid>
@@ -161,15 +211,29 @@ const NewStaffmemberModal = ({ isOpen, onClose }) => {
                 spacing={2}
                 sx={{ alignItems: "center", justifyContent: "center" }}
               >
-                {svgImages.map((imageName, index) => (
-                  <Grid item xs={6} sm={3} md={3} lg={3} key={index}>
+                {Object.values(svgImages).map((imageName, index) => (
+                  <Grid
+                    item
+                    xs={6}
+                    sm={3}
+                    md={3}
+                    lg={3}
+                    key={index}
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => setSelectedAvatar(imageName.value)}
+                  >
                     <img
-                      src={`/images/${imageName}`} // Path to the SVG image
-                      alt={`Image ${index + 1}`} // Alt text for accessibility
+                      src={imageName.value} // Path to the SVG image
+                      alt={imageName.label} // Alt text for accessibility
                       style={{
                         maxWidth: "100%",
                         height: "auto",
                         display: "block",
+                        borderRadius: "50%",
+                        border:
+                          selectedAvatar === imageName.value
+                            ? "3px solid black"
+                            : "",
                       }} // Style to ensure the image fits within the grid item
                     />
                   </Grid>
@@ -210,7 +274,9 @@ const NewStaffmemberModal = ({ isOpen, onClose }) => {
                   paddingTop: "5px",
                 }}
               >
-                <CustomButton onClick={onClose}>ADD STAFF MEMBER</CustomButton>
+                <CustomButton onClick={handleAddMember}>
+                  ADD STAFF MEMBER
+                </CustomButton>
               </Grid>
             </>
           )}

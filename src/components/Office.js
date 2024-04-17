@@ -14,13 +14,27 @@ import { useNavigate } from "react-router-dom";
 import NewStaffmemberModal from "./NewStaffmemberModal";
 
 const Office = () => {
+  const { companyId } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [members, setMembers] = useState(companyDetails[companyId].members);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-  const { companyId } = useParams();
   const navigate = useNavigate();
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
+
+  const handleModalClose = () => {
+    // Reset the selectedAvatar state to null when the modal is closed
+    setSelectedAvatar(null);
+  };
+
   const handleHomeButton = (companyId) => {
     navigate(`/`);
+  };
+  const handleAddMember = (newMember) => {
+    // Add new member to the list
+    // Update the members array of the corresponding company using companyId
+    companyDetails[companyId].members.push(newMember);
+    setMembers([...members, newMember]);
   };
 
   // Use companyId to retrieve company details from companyData
@@ -112,7 +126,12 @@ const Office = () => {
           console.log("Button clicked!");
         }}
       />
-      <NewStaffmemberModal isOpen={isModalOpen} onClose={closeModal} />
+      <NewStaffmemberModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        handleModalClose={handleModalClose}
+        onAddMember={handleAddMember}
+      />
     </Box>
   );
 };
