@@ -42,8 +42,58 @@ const EditDeleteStaffMemberModal = ({
   onClose,
   onDeleteMember,
   currentMember,
+  handleModalClose,
+  onUpdateMember,
+  selectedMemberIcon,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
+  console.log("currentMember", currentMember);
+  useEffect(() => {
+    // Split the full name and set first and last names in state
+    const [first, last] = currentMember.split(" ");
+    setFirstName(first);
+    setLastName(last);
+    setSelectedAvatar(selectedMemberIcon);
+  }, [currentMember, selectedMemberIcon]);
+
+  const handleUpdateMember = () => {
+    // Check if all required fields are filled
+    if (
+      firstName.trim() === "" ||
+      lastName.trim() === "" ||
+      selectedAvatar === null
+    ) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    // Edit member object
+    const editedMember = {
+      name: `${firstName} ${lastName}`,
+      icon: selectedAvatar,
+    };
+
+    // Pass new member data to parent component
+    onUpdateMember(editedMember);
+
+    // Clear input fields
+    setFirstName("");
+    setLastName("");
+    setSelectedAvatar(null);
+
+    // Close the modal
+    onClose();
+    //set modal page to one
+    setCurrentPage(1);
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage(4); // Move to the second page
+  };
+
   const handleEditClick = () => {
     setCurrentPage(3); // Move to the second page
   };
@@ -53,6 +103,9 @@ const EditDeleteStaffMemberModal = ({
 
   const handleBackPage = () => {
     setCurrentPage(1); // Move to the 1st page
+  };
+  const handleBackEditPage = () => {
+    setCurrentPage(3); // Move to the 1st page
   };
 
   const handleBackdropClick = () => {
@@ -69,6 +122,17 @@ const EditDeleteStaffMemberModal = ({
     //set modal page to one
     setCurrentPage(1);
   };
+
+  // Array of SVG file names
+  const svgImages = [
+    { label: "Avatar 1", value: "/images/balloon_man.svg" },
+    { label: "Avatar 2", value: "/images/baseball_man.svg" },
+    { label: "Avatar 3", value: "/images/flying_man.svg" },
+    { label: "Avatar 4", value: "/images/moon_man.svg" },
+    { label: "Avatar 5", value: "/images/one_balloon_man.svg" },
+    { label: "Avatar 6", value: "/images/planet_man.svg" },
+    { label: "Avatar 7", value: "/images/rocket_man.svg" },
+  ];
 
   return (
     <Modal
@@ -169,6 +233,186 @@ const EditDeleteStaffMemberModal = ({
                 <CustomButtonOpposite onClick={handleBackdropClick}>
                   KEEP MEMBER
                 </CustomButtonOpposite>
+              </Grid>
+            </>
+          )}
+
+          {currentPage === 3 && (
+            <>
+              <Grid container item xs={12}>
+                <Grid item xs={6} display="inline-flex">
+                  <Typography variant="h5">Edit Staff Member</Typography>
+                </Grid>
+                <Grid item xs={6} container justifyContent="flex-end">
+                  <HighlightOffIcon
+                    onClick={() => {
+                      onClose();
+                      handleModalClose();
+                      setCurrentPage(1);
+                    }}
+                    sx={{ cursor: "pointer" }}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    id="outlined-basic"
+                    label="First Name"
+                    variant="outlined"
+                    sx={{ display: "block" }}
+                    fullWidth
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Last Name"
+                    variant="outlined"
+                    sx={{ display: "block" }}
+                    fullWidth
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                </Grid>
+              </Grid>
+              <Grid item xs={12} sx={{ textAlign: "center" }}>
+                <Box
+                  sx={{
+                    display: "inline-block",
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "50%",
+
+                    backgroundColor: currentPage === 3 ? "black" : "white",
+                    border: "1px solid black",
+                    marginRight: "5px",
+                  }}
+                ></Box>
+                <Box
+                  sx={{
+                    display: "inline-block",
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "50%",
+
+                    backgroundColor: currentPage === 4 ? "black" : "white",
+                    border: "1px solid black",
+                    marginRight: "5px",
+                  }}
+                ></Box>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  display: "flex",
+                  paddingTop: "5px",
+                }}
+              >
+                <CustomButton onClick={handleNextPage}>Next</CustomButton>
+              </Grid>
+            </>
+          )}
+          {currentPage === 4 && (
+            <>
+              <Grid container item xs={12} alignItems="center">
+                <Grid item xs={9} display="inline-flex">
+                  <ArrowBackIcon
+                    onClick={handleBackEditPage}
+                    sx={{ cursor: "pointer" }}
+                  />
+                  <Typography variant="h5">Edit Staff Member</Typography>
+                </Grid>
+                <Grid item xs={3} container justifyContent="flex-end">
+                  <HighlightOffIcon
+                    onClick={() => {
+                      onClose();
+                      handleModalClose();
+                      setCurrentPage(1);
+                    }}
+                    sx={{ cursor: "pointer" }}
+                  />
+                </Grid>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant="h6">Avatar</Typography>
+              </Grid>
+              <Grid
+                container
+                spacing={2}
+                sx={{ alignItems: "center", justifyContent: "center" }}
+              >
+                {Object.values(svgImages).map((imageName, index) => (
+                  <Grid
+                    item
+                    xs={6}
+                    sm={3}
+                    md={3}
+                    lg={3}
+                    key={index}
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => setSelectedAvatar(imageName.value)}
+                  >
+                    <img
+                      src={imageName.value} // Path to the SVG image
+                      alt={imageName.label} // Alt text for accessibility
+                      style={{
+                        maxWidth: "100%",
+                        height: "auto",
+                        display: "block",
+                        borderRadius: "50%",
+                        border:
+                          selectedAvatar === imageName.value
+                            ? "3px solid black"
+                            : "",
+                      }} // Style to ensure the image fits within the grid item
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+              <Grid item xs={12} sx={{ textAlign: "center" }}>
+                <Box
+                  sx={{
+                    display: "inline-block",
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "50%",
+
+                    backgroundColor: currentPage === 3 ? "black" : "white",
+                    border: "1px solid black",
+                    marginRight: "5px",
+                  }}
+                ></Box>
+                <Box
+                  sx={{
+                    display: "inline-block",
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "50%",
+
+                    backgroundColor: currentPage === 4 ? "black" : "white",
+                    border: "1px solid black",
+                  }}
+                ></Box>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  display: "flex",
+                  paddingTop: "5px",
+                }}
+              >
+                <CustomButton onClick={handleUpdateMember}>
+                  UPDATE STAFF MEMBER
+                </CustomButton>
               </Grid>
             </>
           )}

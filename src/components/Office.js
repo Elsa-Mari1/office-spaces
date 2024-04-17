@@ -26,8 +26,9 @@ const Office = () => {
   const closeEditModal = () => setIsEditModalOpen(false);
   const navigate = useNavigate();
   const [selectedAvatar, setSelectedAvatar] = useState(null);
-  const [selectedMember, setSelectedMember] = useState(null);
-
+  const [selectedMember, setSelectedMember] = useState("");
+  const [selectedMemberIcon, setSelectedMemberIcon] = useState(null);
+  console.log("selectedMember", selectedMember);
   const handleModalClose = () => {
     // Reset the selectedAvatar state to null when the modal is closed
     setSelectedAvatar(null);
@@ -51,6 +52,27 @@ const Office = () => {
     companyDetails[companyId].members = updatedMembers;
 
     setMembers(updatedMembers);
+  };
+
+  const handleUpdateMember = (editedMember) => {
+    // Get the members array of the corresponding company using companyId
+    const companyMembers = companyDetails[companyId].members;
+    // Find the index of the member to be updated in the members array
+    const index = companyMembers.findIndex(
+      (member) => member.name === selectedMember
+    );
+    // If the member is found, update its details
+    if (index !== -1) {
+      // Update the member's details
+      companyMembers[index] = editedMember;
+      // Update the companyDetails object with the updated members list
+      companyDetails[companyId].members = [...companyMembers];
+      // Update the state with the updated members list
+      setMembers([...companyMembers]);
+    } else {
+      // Member not found, handle error or log a message
+      console.error("Member not found:", editedMember.name);
+    }
   };
 
   // Use companyId to retrieve company details from companyData
@@ -96,6 +118,11 @@ const Office = () => {
           renderInput={(params) => <TextField {...params} label="Search" />}
           onChange={(event, value) => {
             if (value) {
+              // Find the selected member object
+              setSelectedMemberIcon(
+                selectedCompany.members.find((member) => member.name === value)
+                  .icon
+              );
               // Perform action when an option is selected
               openEditModal();
               setSelectedMember(value);
@@ -136,6 +163,7 @@ const Office = () => {
               onClick={() => {
                 openEditModal();
                 setSelectedMember(member.name);
+                setSelectedMemberIcon(member.icon);
                 console.log("3 dotsButton clicked!");
               }}
             />
@@ -165,7 +193,10 @@ const Office = () => {
         isOpen={isEditModalOpen}
         onClose={closeEditModal}
         onDeleteMember={handleDeleteMember}
+        onUpdateMember={handleUpdateMember}
+        handleModalClose={handleModalClose}
         currentMember={selectedMember}
+        selectedMemberIcon={selectedMemberIcon}
       />
     </Box>
   );
