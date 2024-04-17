@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, IconButton } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+// import Backdrop from "@mui/material/Backdrop";
 import Button from "@mui/material/Button";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import TextField from "@mui/material/TextField";
@@ -29,6 +30,18 @@ const NewStaffmemberModal = ({
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [selectedAvatar, setSelectedAvatar] = useState(null);
+  useEffect(() => {
+    if (selectedAvatar === null) {
+      // Remove the border around the avatar when selectedAvatar is null
+      // Perform any cleanup here
+      console.log("avatar is null");
+    }
+  }, [selectedAvatar]);
+
+  const handleBackdropClick = () => {
+    setCurrentPage(1);
+    onClose(); // Close the modal
+  };
 
   const handleAddMember = () => {
     // Check if all required fields are filled
@@ -85,6 +98,11 @@ const NewStaffmemberModal = ({
       onClose={onClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      slotProps={{
+        backdrop: {
+          onClick: handleBackdropClick,
+        },
+      }}
       sx={{
         display: "flex",
         alignItems: "center",

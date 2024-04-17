@@ -12,15 +12,21 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import NewStaffmemberModal from "./NewStaffmemberModal";
+import EditStaffMemberModal from "./EditStaffMemberModal";
+import EditDeleteStaffMemberModal from "./EditDeleteStaffMemberModal";
 
 const Office = () => {
   const { companyId } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [members, setMembers] = useState(companyDetails[companyId].members);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const openEditModal = () => setIsEditModalOpen(true);
+  const closeEditModal = () => setIsEditModalOpen(false);
   const navigate = useNavigate();
   const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const [selectedMember, setSelectedMember] = useState(null);
 
   const handleModalClose = () => {
     // Reset the selectedAvatar state to null when the modal is closed
@@ -35,6 +41,16 @@ const Office = () => {
     // Update the members array of the corresponding company using companyId
     companyDetails[companyId].members.push(newMember);
     setMembers([...members, newMember]);
+  };
+
+  const handleDeleteMember = (delMember) => {
+    const updatedMembers = members.filter(
+      (member) => member.name !== delMember
+    );
+
+    companyDetails[companyId].members = updatedMembers;
+
+    setMembers(updatedMembers);
   };
 
   // Use companyId to retrieve company details from companyData
@@ -78,6 +94,14 @@ const Office = () => {
           options={selectedCompany.members.map((member) => member.name)}
           sx={{ width: "100%", marginBottom: "10px" }}
           renderInput={(params) => <TextField {...params} label="Search" />}
+          onChange={(event, value) => {
+            if (value) {
+              // Perform action when an option is selected
+              openEditModal();
+              setSelectedMember(value);
+              console.log("Option selected:", value);
+            }
+          }}
         />
       </Grid>
       <Grid container item xs={12} alignItems="center">
@@ -107,7 +131,14 @@ const Office = () => {
 
           {/* Right-aligned icons */}
           <Grid item xs={6} container justifyContent="flex-end">
-            <MoreVertIcon />
+            <MoreVertIcon
+              sx={{ cursor: "pointer" }}
+              onClick={() => {
+                openEditModal();
+                setSelectedMember(member.name);
+                console.log("3 dotsButton clicked!");
+              }}
+            />
           </Grid>
         </Grid>
       ))}
@@ -117,11 +148,9 @@ const Office = () => {
           bottom: 16,
           right: 16,
           fontSize: 70, // Adjust the size of the icon as needed
-          //   color: "primary.contrastText", // Use the primary color for the icon
           cursor: "pointer", // Show pointer cursor on hover
         }}
         onClick={() => {
-          // Add your onClick logic here
           openModal();
           console.log("Button clicked!");
         }}
@@ -131,6 +160,12 @@ const Office = () => {
         onClose={closeModal}
         handleModalClose={handleModalClose}
         onAddMember={handleAddMember}
+      />
+      <EditDeleteStaffMemberModal
+        isOpen={isEditModalOpen}
+        onClose={closeEditModal}
+        onDeleteMember={handleDeleteMember}
+        currentMember={selectedMember}
       />
     </Box>
   );
