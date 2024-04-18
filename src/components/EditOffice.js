@@ -155,11 +155,11 @@ const EditOffice = ({
           {/* {currentPage === 1 && (
           <> */}
           <Grid container item xs={12} alignItems="center">
-            <Grid item xs={6} display="inline-flex">
+            <Grid item xs={4} display="inline-flex">
               <ArrowBackIcon onClick={onClose} sx={{ cursor: "pointer" }} />
             </Grid>
-            <Grid item xs={6} justifyContent="flex-end">
-              <Typography variant="h5">New Office</Typography>
+            <Grid item xs={8} justifyContent="flex-end">
+              <Typography variant="h5">Edit Office</Typography>
             </Grid>
           </Grid>
           <Grid container spacing={2}>
@@ -235,8 +235,8 @@ const EditOffice = ({
             {Object.values(svgColors).map((imageName, index) => (
               <Grid
                 item
-                xs={6}
-                sm={3}
+                xs={10}
+                sm={8}
                 md={3}
                 lg={2}
                 key={index}
@@ -319,7 +319,7 @@ const EditOffice = ({
             boxShadow: 24,
             p: 4,
             borderRadius: 4,
-            maxWidth: "30%", // Set maximum width for the modal
+            maxWidth: "80%", // Set maximum width for the modal
           }}
         >
           <Grid container item xs={12} alignItems="center">
@@ -328,7 +328,7 @@ const EditOffice = ({
                 onClick={handleBackPage}
                 sx={{ cursor: "pointer" }}
               />
-              <Typography variant="h5">
+              <Typography variant="h7">
                 Are You Sure You Want To Delete Office?
               </Typography>
             </Grid>

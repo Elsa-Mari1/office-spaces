@@ -75,7 +75,7 @@ const OfficeBlock = ({
           }}
         >
           <img src="/office-spaces/images/members.svg" alt="members svg" />
-          <Typography variant="h6">
+          <Typography variant="h7">
             {numberMembers} Staff Members in Office
           </Typography>
         </Grid>

@@ -107,7 +107,7 @@ const NewStaffmemberModal = ({
           boxShadow: 24,
           p: 4,
           borderRadius: 4,
-          maxWidth: "40%", // Set maximum width for the modal
+          maxWidth: "80%", // Set maximum width for the modal
         }}
       >
         <Grid container spacing={2} alignItems="center">
@@ -115,7 +115,7 @@ const NewStaffmemberModal = ({
             <>
               <Grid container item xs={12}>
                 <Grid item xs={6} display="inline-flex">
-                  <Typography variant="h5">New Staff Member</Typography>
+                  <Typography variant="h6">New Staff Member</Typography>
                 </Grid>
                 <Grid item xs={6} container justifyContent="flex-end">
                   <HighlightOffIcon
@@ -201,7 +201,7 @@ const NewStaffmemberModal = ({
                     onClick={handleBackPage}
                     sx={{ cursor: "pointer" }}
                   />
-                  <Typography variant="h5">New Staff Member</Typography>
+                  <Typography variant="h6">New Staff Member</Typography>
                 </Grid>
                 <Grid item xs={3} container justifyContent="flex-end">
                   <HighlightOffIcon
@@ -226,8 +226,8 @@ const NewStaffmemberModal = ({
                 {Object.values(svgImages).map((imageName, index) => (
                   <Grid
                     item
-                    xs={6}
-                    sm={3}
+                    xs={10}
+                    sm={8}
                     md={3}
                     lg={3}
                     key={index}

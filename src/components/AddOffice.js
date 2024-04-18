@@ -81,13 +81,13 @@ const AddOffice = ({ isOpen, onClose, onAddOffice }) => {
     >
       <Box sx={{ padding: "30px" }}>
         <Grid container item xs={12} alignItems="center">
-          <Grid item xs={6} display="inline-flex">
+          <Grid item xs={4} display="inline-flex">
             <ArrowBackIcon
               onClick={handleHomeButton}
               sx={{ cursor: "pointer" }}
             />
           </Grid>
-          <Grid item xs={6} justifyContent="flex-end">
+          <Grid item xs={8} justifyContent="flex-end">
             <Typography variant="h5">New Office</Typography>
           </Grid>
         </Grid>
@@ -164,8 +164,8 @@ const AddOffice = ({ isOpen, onClose, onAddOffice }) => {
           {Object.values(svgColors).map((imageName, index) => (
             <Grid
               item
-              xs={6}
-              sm={3}
+              xs={10}
+              sm={8}
               md={3}
               lg={2}
               key={index}

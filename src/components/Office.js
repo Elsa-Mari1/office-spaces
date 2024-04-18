@@ -7,30 +7,22 @@ import companyDetails from "../data/CompanyData"; // Adjust the path as needed
 import Autocomplete from "@mui/material/Autocomplete";
 import { useParams } from "react-router-dom";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import SearchIcon from "@mui/icons-material/Search";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import NewStaffmemberModal from "./NewStaffmemberModal";
-// import EditOffice from "./EditOffice";
 import EditDeleteStaffMemberModal from "./EditDeleteStaffMemberModal";
-// import EditOffice from "./EditOffice";
-import { useLocation } from "react-router-dom";
 
 const Office = () => {
   const { companyId } = useParams();
-  //   const { state } = useLocation();
-  //   const { handleDeleteOffice, handleUpdateOffice } = state || {};
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  //   const [isEditOfficeModalOpen, setIsEditOfficeModalOpen] = useState(false);
   const [members, setMembers] = useState(companyDetails[companyId].members);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const openEditModal = () => setIsEditModalOpen(true);
   const closeEditModal = () => setIsEditModalOpen(false);
-  //   const openEditOfficeModal = () => setIsEditOfficeModalOpen(true);
-  //   const closeEditOfficeModal = () => setIsEditOfficeModalOpen(false);
+
   const navigate = useNavigate();
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [selectedMember, setSelectedMember] = useState("");
@@ -113,11 +105,6 @@ const Office = () => {
           officeCapacity={selectedCompany.officeCapacity}
           location={selectedCompany.location}
           numberMembers={selectedCompany.members.length}
-          //   handleClick={() => {
-          //     openEditOfficeModal(); // Open the edit modal when OfficeBlock is clicked
-          //     // setSelectedMember(""); // Reset selected member state
-          //     // setSelectedMemberIcon(null); // Reset selected member icon state
-          //   }}
         />
       </Box>
       <Grid>
@@ -145,10 +132,10 @@ const Office = () => {
       </Grid>
       <Grid container item xs={12} alignItems="center">
         <Grid item xs={6} display="inline-flex">
-          <Typography variant="h4">Staff Members In Office</Typography>
+          <Typography variant="h5">Staff Members In Office</Typography>
         </Grid>
         <Grid item xs={6} container justifyContent="flex-end">
-          <Typography variant="h4">{selectedCompany.members.length}</Typography>
+          <Typography variant="h5">{selectedCompany.members.length}</Typography>
         </Grid>
       </Grid>
       {selectedCompany.members.map((member) => (
@@ -165,7 +152,7 @@ const Office = () => {
             }}
           >
             <img src={member.icon} alt="members svg" />
-            <Typography variant="h6">{member.name}</Typography>
+            <Typography variant="h7">{member.name}</Typography>
           </Grid>
 
           {/* Right-aligned icons */}
