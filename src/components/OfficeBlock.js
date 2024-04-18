@@ -74,7 +74,10 @@ const OfficeBlock = ({
             gap: 1,
           }}
         >
-          <img src="/images/members.svg" alt="members svg" />
+          <img
+            src={window.location.origin + "/images/members.svg"}
+            alt="members svg"
+          />
           <Typography variant="h6">
             {numberMembers} Staff Members in Office
           </Typography>
