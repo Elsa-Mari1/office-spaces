@@ -10,7 +10,7 @@ import { appTheme } from "./themes/theme";
 const App = () => {
   return (
     // <ThemeProvider theme={appTheme}>
-    <Box>
+    <Box className="main-container">
       <RoutesFunc />
     </Box>
     // {/* </ThemeProvider> */}

@@ -145,7 +145,12 @@ const EditOffice = ({
 
   return (
     <>
-      <Dialog fullScreen open={isOpen} onClose={onClose}>
+      <Dialog
+        fullScreen
+        open={isOpen}
+        onClose={onClose}
+        className="main-container"
+      >
         <Box sx={{ padding: "30px" }}>
           {/* {currentPage === 1 && (
           <> */}

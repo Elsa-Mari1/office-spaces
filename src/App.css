@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.main-container {
+  max-width: 800px; /* Adjust the value according to your design */
+  margin: 0 auto; /* Center the container horizontally */
+}

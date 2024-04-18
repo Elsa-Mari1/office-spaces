@@ -126,6 +126,7 @@ const EditDeleteStaffMemberModal = ({
 
   return (
     <Modal
+      className="main-container"
       open={isOpen}
       onClose={onClose}
       aria-labelledby="modal-modal-title"
@@ -147,7 +148,7 @@ const EditDeleteStaffMemberModal = ({
           boxShadow: 24,
           p: 4,
           borderRadius: 4,
-          maxWidth: "30%", // Set maximum width for the modal
+          maxWidth: "40%", // Set maximum width for the modal
         }}
       >
         <Grid container spacing={2} alignItems="center">

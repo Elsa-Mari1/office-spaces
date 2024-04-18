@@ -73,7 +73,12 @@ const AddOffice = ({ isOpen, onClose, onAddOffice }) => {
   };
 
   return (
-    <Dialog fullScreen open={isOpen} onClose={onClose}>
+    <Dialog
+      fullScreen
+      open={isOpen}
+      onClose={onClose}
+      className="main-container"
+    >
       <Box sx={{ padding: "30px" }}>
         <Grid container item xs={12} alignItems="center">
           <Grid item xs={6} display="inline-flex">
