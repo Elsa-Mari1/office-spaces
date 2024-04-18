@@ -2,28 +2,28 @@
 const svgImages = [
   {
     label: "Avatar 1",
-    value: window.location.origin + "/images/balloon_man.svg",
+    value: "/office-spaces/images/balloon_man.svg",
   },
   {
     label: "Avatar 2",
-    value: window.location.origin + "/images/baseball_man.svg",
+    value: "/office-spaces/images/baseball_man.svg",
   },
   {
     label: "Avatar 3",
-    value: window.location.origin + "/images/flying_man.svg",
+    value: "/office-spaces/images/flying_man.svg",
   },
-  { label: "Avatar 4", value: window.location.origin + "/images/moon_man.svg" },
+  { label: "Avatar 4", value: "/images/moon_man.svg" },
   {
     label: "Avatar 5",
-    value: window.location.origin + "/images/one_balloon_man.svg",
+    value: "/office-spaces/images/one_balloon_man.svg",
   },
   {
     label: "Avatar 6",
-    value: window.location.origin + "/images/planet_man.svg",
+    value: "/office-spaces/images/planet_man.svg",
   },
   {
     label: "Avatar 7",
-    value: window.location.origin + "/images/rocket_man.svg",
+    value: "/office-spaces/images/rocket_man.svg",
   },
 ];
 
