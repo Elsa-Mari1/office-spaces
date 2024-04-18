@@ -12,7 +12,7 @@ const svgImages = [
     label: "Avatar 3",
     value: "/office-spaces/images/flying_man.svg",
   },
-  { label: "Avatar 4", value: "/images/moon_man.svg" },
+  { label: "Avatar 4", value: "/office-spaces/images/moon_man.svg" },
   {
     label: "Avatar 5",
     value: "/office-spaces/images/one_balloon_man.svg",
