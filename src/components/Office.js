@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import NewStaffmemberModal from "./NewStaffmemberModal";
 // import EditOffice from "./EditOffice";
 import EditDeleteStaffMemberModal from "./EditDeleteStaffMemberModal";
-import EditOffice from "./EditOffice";
+// import EditOffice from "./EditOffice";
 import { useLocation } from "react-router-dom";
 
 const Office = () => {
@@ -23,14 +23,14 @@ const Office = () => {
   //   const { handleDeleteOffice, handleUpdateOffice } = state || {};
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isEditOfficeModalOpen, setIsEditOfficeModalOpen] = useState(false);
+  //   const [isEditOfficeModalOpen, setIsEditOfficeModalOpen] = useState(false);
   const [members, setMembers] = useState(companyDetails[companyId].members);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const openEditModal = () => setIsEditModalOpen(true);
   const closeEditModal = () => setIsEditModalOpen(false);
-  const openEditOfficeModal = () => setIsEditOfficeModalOpen(true);
-  const closeEditOfficeModal = () => setIsEditOfficeModalOpen(false);
+  //   const openEditOfficeModal = () => setIsEditOfficeModalOpen(true);
+  //   const closeEditOfficeModal = () => setIsEditOfficeModalOpen(false);
   const navigate = useNavigate();
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [selectedMember, setSelectedMember] = useState("");
@@ -113,11 +113,11 @@ const Office = () => {
           officeCapacity={selectedCompany.officeCapacity}
           location={selectedCompany.location}
           numberMembers={selectedCompany.members.length}
-          handleClick={() => {
-            openEditOfficeModal(); // Open the edit modal when OfficeBlock is clicked
-            // setSelectedMember(""); // Reset selected member state
-            // setSelectedMemberIcon(null); // Reset selected member icon state
-          }}
+          //   handleClick={() => {
+          //     openEditOfficeModal(); // Open the edit modal when OfficeBlock is clicked
+          //     // setSelectedMember(""); // Reset selected member state
+          //     // setSelectedMemberIcon(null); // Reset selected member icon state
+          //   }}
         />
       </Box>
       <Grid>
@@ -210,13 +210,13 @@ const Office = () => {
         currentMember={selectedMember}
         selectedMemberIcon={selectedMemberIcon}
       />
-      <EditOffice
+      {/* <EditOffice
         isOpen={isEditOfficeModalOpen}
         onClose={closeEditModal}
         officeData={selectedCompany} // Pass officeData to EditOffice
         // onUpdateOffice={handleUpdateOffice}
         // onDeleteOffice={handleDeleteOffice}
-      />
+      /> */}
     </Box>
   );
 };
