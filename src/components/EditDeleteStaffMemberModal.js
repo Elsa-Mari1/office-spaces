@@ -8,6 +8,7 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import svgImages from "../data/SvgImages";
 // Custom styling for the Button component
 const CustomButton = styled(Button)({
   backgroundColor: "#007bff",
@@ -122,17 +123,6 @@ const EditDeleteStaffMemberModal = ({
     //set modal page to one
     setCurrentPage(1);
   };
-
-  // Array of SVG file names
-  const svgImages = [
-    { label: "Avatar 1", value: "/images/balloon_man.svg" },
-    { label: "Avatar 2", value: "/images/baseball_man.svg" },
-    { label: "Avatar 3", value: "/images/flying_man.svg" },
-    { label: "Avatar 4", value: "/images/moon_man.svg" },
-    { label: "Avatar 5", value: "/images/one_balloon_man.svg" },
-    { label: "Avatar 6", value: "/images/planet_man.svg" },
-    { label: "Avatar 7", value: "/images/rocket_man.svg" },
-  ];
 
   return (
     <Modal

@@ -8,6 +8,8 @@ import { styled } from "@mui/material/styles";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
+import Modal from "@mui/material/Modal";
+import svgColors from "../data/SvgColors";
 
 const CustomButton = styled(Button)({
   backgroundColor: "#007bff", // Example background color
@@ -29,19 +31,75 @@ const CustomButtonOpposite = styled(Button)({
   },
 });
 
-const EditOffice = ({ isOpen, onClose, onUpdateOffice, officeData }) => {
+const CustomButtonDel = styled(Button)({
+  backgroundColor: "red", // Example background color
+  color: "white", // Example text color
+  borderRadius: "20px", // Set the border radius
+  width: "300px", // Set the width
+  "&:hover": {
+    backgroundColor: "#808080", // Example hover background color
+  },
+});
+
+const EditOffice = ({
+  isOpen,
+  onClose,
+  onUpdateOffice,
+  officeData,
+  onDeleteOffice,
+}) => {
   const [officeName, setOfficeName] = useState("");
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+
+  const openConfirmationModal = () => setIsConfirmationOpen(true);
+  const closeConfirmationModal = () => setIsConfirmationOpen(false);
   const [physicalAddress, setPhysicalAddress] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [maxCapacity, setMaxCapacity] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [listMembers, setListMembers] = useState();
+  // const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
   const handleHomeButton = () => {
     onClose();
   };
   console.log("officeData hier", officeData);
+
+  const handleBackPage = () => {
+    // setCurrentPage(1); // Move to the 1st page
+    closeConfirmationModal();
+  };
+
+  // const handleNextPage = () => {
+  //   // setCurrentPage(2); // Move to the second page
+  //   openModal();
+  // };
+
+  const handleBackdropClick = () => {
+    // setCurrentPage(1);
+    onClose(); // Close the modal
+    closeConfirmationModal();
+  };
+
+  const handleDeleteOffice = () => {
+    // Pass new member data to parent component
+    // onDeleteOffice(officeData);
+    openConfirmationModal();
+
+    // Close the modal
+    // onClose();
+    //set modal page to one
+    // onClose()
+  };
+  const handleDeleteOfficeFinal = () => {
+    // Pass the current office data to the parent component for deletion
+    onDeleteOffice(officeData);
+
+    // Close the modal and the confirmation modal
+    onClose();
+    closeConfirmationModal();
+  };
 
   useEffect(() => {
     setOfficeName(officeData.heading);
@@ -52,20 +110,6 @@ const EditOffice = ({ isOpen, onClose, onUpdateOffice, officeData }) => {
     setSelectedColor(officeData.color);
     setListMembers(officeData.members);
   }, [officeData]);
-  // Array of SVG file names
-  const svgColors = [
-    { color: "#FFBE0B", value: "/images/yellow.svg" },
-    { color: "#FF9B71", value: "/images/coral.svg" },
-    { color: "#FB5607", value: "/images/red.svg" },
-    { color: "#97512C", value: "/images/brown.svg" },
-    { color: "#DBBADD", value: "/images/violet.svg" },
-    { color: "#FF006E", value: "/images/pink.svg" },
-    { color: "#A9F0D1", value: "/images/mint.svg" },
-    { color: "#00B402", value: "/images/green.svg" },
-    { color: "#489DDA", value: "/images/light_blue.svg" },
-    { color: "#0072E8", value: "/images/blue.svg" },
-    { color: "#8338EC", value: "/images/purple.svg" },
-  ];
 
   const handleUpdateOffice = () => {
     // Validate input fields
@@ -100,145 +144,221 @@ const EditOffice = ({ isOpen, onClose, onUpdateOffice, officeData }) => {
   };
 
   return (
-    <Dialog fullScreen open={isOpen} onClose={onClose}>
-      <Box sx={{ padding: "30px" }}>
-        <Grid container item xs={12} alignItems="center">
-          <Grid item xs={6} display="inline-flex">
-            <ArrowBackIcon onClick={onClose} sx={{ cursor: "pointer" }} />
+    <>
+      <Dialog fullScreen open={isOpen} onClose={onClose}>
+        <Box sx={{ padding: "30px" }}>
+          {/* {currentPage === 1 && (
+          <> */}
+          <Grid container item xs={12} alignItems="center">
+            <Grid item xs={6} display="inline-flex">
+              <ArrowBackIcon onClick={onClose} sx={{ cursor: "pointer" }} />
+            </Grid>
+            <Grid item xs={6} justifyContent="flex-end">
+              <Typography variant="h5">New Office</Typography>
+            </Grid>
           </Grid>
-          <Grid item xs={6} justifyContent="flex-end">
-            <Typography variant="h5">New Office</Typography>
-          </Grid>
-        </Grid>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              id="outlined-basic"
-              label="Office Name"
-              variant="outlined"
-              sx={{ display: "block" }}
-              fullWidth
-              value={officeName}
-              onChange={(e) => setOfficeName(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              id="outlined-basic"
-              label="Physical Address"
-              variant="outlined"
-              sx={{ display: "block" }}
-              fullWidth
-              value={physicalAddress}
-              onChange={(e) => setPhysicalAddress(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              id="outlined-basic"
-              label="Email Address"
-              variant="outlined"
-              sx={{ display: "block" }}
-              fullWidth
-              value={emailAddress}
-              onChange={(e) => setEmailAddress(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              id="outlined-basic"
-              label="Phone Number"
-              variant="outlined"
-              sx={{ display: "block" }}
-              fullWidth
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              id="outlined-basic"
-              label="Maximum Capacity"
-              variant="outlined"
-              sx={{ display: "block" }}
-              fullWidth
-              value={maxCapacity}
-              onChange={(e) => setMaxCapacity(Number(e.target.value))}
-            />
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h5">Office Color</Typography>
-        </Grid>
-        <Grid
-          container
-          spacing={2}
-          sx={{
-            justifyContent: "center",
-            alignItems: "center",
-            display: "flex",
-            width: "50%",
-
-            //   display: "block",
-          }}
-        >
-          {Object.values(svgColors).map((imageName, index) => (
-            <Grid
-              item
-              xs={6}
-              sm={3}
-              md={3}
-              lg={2}
-              key={index}
-              sx={{ cursor: "pointer" }}
-              onClick={() => {
-                setSelectedColor(imageName.color);
-                console.log("imageName", imageName);
-              }}
-            >
-              <img
-                src={imageName.value} // Path to the SVG image
-                alt={imageName.color} // Alt text for accessibility
-                style={{
-                  maxWidth: "100%",
-                  height: "auto",
-                  display: "block",
-                  borderRadius: "50%",
-                  border:
-                    selectedColor === imageName.value ? "3px solid black" : "",
-                }} // Style to ensure the image fits within the grid item
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                id="outlined-basic"
+                label="Office Name"
+                variant="outlined"
+                sx={{ display: "block" }}
+                fullWidth
+                value={officeName}
+                onChange={(e) => setOfficeName(e.target.value)}
               />
             </Grid>
-          ))}
-        </Grid>
-        <Grid
-          item
-          xs={12}
+            <Grid item xs={12}>
+              <TextField
+                id="outlined-basic"
+                label="Physical Address"
+                variant="outlined"
+                sx={{ display: "block" }}
+                fullWidth
+                value={physicalAddress}
+                onChange={(e) => setPhysicalAddress(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="outlined-basic"
+                label="Email Address"
+                variant="outlined"
+                sx={{ display: "block" }}
+                fullWidth
+                value={emailAddress}
+                onChange={(e) => setEmailAddress(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="outlined-basic"
+                label="Phone Number"
+                variant="outlined"
+                sx={{ display: "block" }}
+                fullWidth
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="outlined-basic"
+                label="Maximum Capacity"
+                variant="outlined"
+                sx={{ display: "block" }}
+                fullWidth
+                value={maxCapacity}
+                onChange={(e) => setMaxCapacity(Number(e.target.value))}
+              />
+            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h5">Office Color</Typography>
+          </Grid>
+          <Grid
+            container
+            spacing={2}
+            justifyContent="center"
+            alignItems="center"
+            sx={{
+              display: "flex",
+              padding: "30px",
+            }}
+          >
+            {Object.values(svgColors).map((imageName, index) => (
+              <Grid
+                item
+                xs={6}
+                sm={3}
+                md={3}
+                lg={2}
+                key={index}
+                sx={{
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+                onClick={() => {
+                  setSelectedColor(imageName.color);
+                  console.log("imageName", imageName);
+                }}
+              >
+                <img
+                  src={imageName.value} // Path to the SVG image
+                  alt={imageName.color} // Alt text for accessibility
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                    display: "block",
+                    borderRadius: "50%",
+                    border:
+                      selectedColor === imageName.color
+                        ? "3px solid black"
+                        : "",
+                  }} // Style to ensure the image fits within the grid item
+                />
+              </Grid>
+            ))}
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sx={{
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              paddingTop: "5px",
+            }}
+          >
+            <CustomButton onClick={handleUpdateOffice}>
+              UPDATE OFFICE
+            </CustomButton>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sx={{
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              paddingTop: "5px",
+            }}
+          >
+            <CustomButtonOpposite onClick={handleDeleteOffice}>
+              DELETE OFFICE
+            </CustomButtonOpposite>
+          </Grid>
+        </Box>
+      </Dialog>
+      <Modal
+        open={isConfirmationOpen}
+        onClose={closeConfirmationModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        slotProps={{
+          backdrop: {
+            onClick: handleBackdropClick,
+          },
+        }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Box
           sx={{
-            justifyContent: "center",
-            alignItems: "center",
-            display: "flex",
-            paddingTop: "5px",
+            bgcolor: "white",
+            boxShadow: 24,
+            p: 4,
+            borderRadius: 4,
+            maxWidth: "30%", // Set maximum width for the modal
           }}
         >
-          <CustomButton onClick={handleUpdateOffice}>
-            UPDATE OFFICE
-          </CustomButton>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sx={{
-            justifyContent: "center",
-            alignItems: "center",
-            display: "flex",
-            paddingTop: "5px",
-          }}
-        >
-          <CustomButtonOpposite>DELETE OFFICE</CustomButtonOpposite>
-        </Grid>
-      </Box>
-    </Dialog>
+          <Grid container item xs={12} alignItems="center">
+            <Grid item xs={9} display="inline-flex">
+              <ArrowBackIcon
+                onClick={handleBackPage}
+                sx={{ cursor: "pointer" }}
+              />
+              <Typography variant="h5">
+                Are You Sure You Want To Delete Office?
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sx={{
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              paddingTop: "5px",
+            }}
+          >
+            <CustomButtonDel onClick={handleDeleteOfficeFinal}>
+              DELETE OFFICE
+            </CustomButtonDel>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sx={{
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              paddingTop: "5px",
+            }}
+          >
+            <CustomButtonOpposite onClick={handleBackdropClick}>
+              KEEP OFFICE
+            </CustomButtonOpposite>
+          </Grid>
+        </Box>
+      </Modal>
+    </>
   );
 };
 

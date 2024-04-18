@@ -10,7 +10,7 @@ import AddOffice from "./AddOffice";
 import EditOffice from "./EditOffice";
 
 const Home = () => {
-  const [data, setData] = useState("");
+  const [data, setData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [currentCompanyId, setCurrentCompanyId] = useState("");
@@ -73,9 +73,30 @@ const Home = () => {
 
     // Update the state with the updated data
     setData(updatedData);
-    // } else {
-    //   console.error(`Office with id ${officeId} does not exist.`);
-    // }
+  };
+
+  const handleDeleteOffice = (officeToDelete) => {
+    if (!currentCompanyId) {
+      console.log("No office selected");
+      return;
+    }
+    // Get the id of the office to delete
+    const officeId = currentCompanyId;
+
+    // Check if data exists and is not empty
+    if (currentCompanyId && Object.keys(data).length > 0) {
+      // Check if the office with the provided id exists in the data state
+      if (data.hasOwnProperty(officeId)) {
+        // Copy the current data state
+        const updatedData = { ...data };
+
+        // Delete the office data using the office id as key
+        delete updatedData[officeId];
+
+        // Update the state with the updated data
+        setData(updatedData);
+      }
+    }
   };
 
   return (
@@ -137,6 +158,7 @@ const Home = () => {
         onClose={() => setModalOpen(false)}
         officeData={officeData} // Pass officeData to EditOffice
         onUpdateOffice={handleUpdateOffice}
+        onDeleteOffice={handleDeleteOffice}
       />
     </Box>
   );

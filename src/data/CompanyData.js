@@ -13,7 +13,7 @@ const companyDetails = {
       { name: "Jenner Venter", icon: "/images/one_balloon_man.svg" },
       { name: "Janke B Du Toit", icon: "/images/planet_man.svg" },
     ],
-    color: "#00008B",
+    color: "#0072E8",
   },
   1: {
     heading: "Company ABC",
@@ -25,7 +25,7 @@ const companyDetails = {
       { name: "Alice Smith", icon: "/images/balloon_man.svg" },
       { name: "Bob Johnson", icon: "/images/rocket_man.svg" },
     ],
-    color: "#f00",
+    color: "#FFBE0B",
   },
   2: {
     heading: "Company XYZ",
@@ -38,7 +38,7 @@ const companyDetails = {
       { name: "Diana Garcia", icon: "/images/planet_man.svg" },
       { name: "Evan Wong", icon: "/images/moon_man.svg" },
     ],
-    color: "#0f0",
+    color: "#97512C",
   },
   3: {
     heading: "Company DEF",
@@ -51,7 +51,7 @@ const companyDetails = {
       { name: "Diana Garcia", icon: "/images/planet_man.svg" },
       { name: "Evan Wong", icon: "/images/moon_man.svg" },
     ],
-    color: "#006400",
+    color: "#DBBADD",
   },
   4: {
     heading: "Company GHI",
@@ -64,7 +64,7 @@ const companyDetails = {
       { name: "Diana Garcia", icon: "/images/planet_man.svg" },
       { name: "Evan Wong", icon: "/images/moon_man.svg" },
     ],
-    color: "#FF8C00",
+    color: "#8338EC",
   },
   5: {
     heading: "Company JKL",
@@ -77,7 +77,7 @@ const companyDetails = {
       { name: "Diana Garcia", icon: "/images/planet_man.svg" },
       { name: "Evan Wong", icon: "/images/moon_man.svg" },
     ],
-    color: "#800080",
+    color: "#A9F0D1",
   },
 };
 

@@ -9,6 +9,7 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import svgImages from "../data/SvgImages";
 // Custom styling for the Button component
 const CustomButton = styled(Button)({
   backgroundColor: "#007bff", // Example background color
@@ -41,6 +42,7 @@ const NewStaffmemberModal = ({
   const handleBackdropClick = () => {
     setCurrentPage(1);
     onClose(); // Close the modal
+    setSelectedAvatar(null);
   };
 
   const handleAddMember = () => {
@@ -81,17 +83,6 @@ const NewStaffmemberModal = ({
     setCurrentPage(1); // Move to the 1st page
   };
 
-  // Array of SVG file names
-  const svgImages = [
-    { label: "Avatar 1", value: "/images/balloon_man.svg" },
-    { label: "Avatar 2", value: "/images/baseball_man.svg" },
-    { label: "Avatar 3", value: "/images/flying_man.svg" },
-    { label: "Avatar 4", value: "/images/moon_man.svg" },
-    { label: "Avatar 5", value: "/images/one_balloon_man.svg" },
-    { label: "Avatar 6", value: "/images/planet_man.svg" },
-    { label: "Avatar 7", value: "/images/rocket_man.svg" },
-  ];
-
   return (
     <Modal
       open={isOpen}
@@ -131,6 +122,7 @@ const NewStaffmemberModal = ({
                       onClose();
                       handleModalClose();
                       setCurrentPage(1);
+                      setSelectedAvatar(null);
                     }}
                     sx={{ cursor: "pointer" }}
                   />
@@ -216,6 +208,7 @@ const NewStaffmemberModal = ({
                       onClose();
                       handleModalClose();
                       setCurrentPage(1);
+                      setSelectedAvatar(null);
                     }}
                     sx={{ cursor: "pointer" }}
                   />

@@ -8,6 +8,7 @@ import { styled } from "@mui/material/styles";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
+import svgColors from "../data/SvgColors";
 
 const CustomButton = styled(Button)({
   backgroundColor: "#007bff", // Example background color
@@ -30,20 +31,6 @@ const AddOffice = ({ isOpen, onClose, onAddOffice }) => {
   const handleHomeButton = () => {
     onClose();
   };
-  // Array of SVG file names
-  const svgColors = [
-    { color: "#FFBE0B", value: "/images/yellow.svg" },
-    { color: "#FF9B71", value: "/images/coral.svg" },
-    { color: "#FB5607", value: "/images/red.svg" },
-    { color: "#97512C", value: "/images/brown.svg" },
-    { color: "#DBBADD", value: "/images/violet.svg" },
-    { color: "#FF006E", value: "/images/pink.svg" },
-    { color: "#A9F0D1", value: "/images/mint.svg" },
-    { color: "#00B402", value: "/images/green.svg" },
-    { color: "#489DDA", value: "/images/light_blue.svg" },
-    { color: "#0072E8", value: "/images/blue.svg" },
-    { color: "#8338EC", value: "/images/purple.svg" },
-  ];
 
   const handleAddOffice = () => {
     // Check if all required fields are filled
@@ -162,13 +149,11 @@ const AddOffice = ({ isOpen, onClose, onAddOffice }) => {
         <Grid
           container
           spacing={2}
+          justifyContent="center"
+          alignItems="center"
           sx={{
-            justifyContent: "center",
-            alignItems: "center",
             display: "flex",
-            width: "50%",
-
-            //   display: "block",
+            padding: "30px",
           }}
         >
           {Object.values(svgColors).map((imageName, index) => (
@@ -179,7 +164,11 @@ const AddOffice = ({ isOpen, onClose, onAddOffice }) => {
               md={3}
               lg={2}
               key={index}
-              sx={{ cursor: "pointer" }}
+              sx={{
+                cursor: "pointer",
+                display: "flex",
+                justifyContent: "center",
+              }}
               onClick={() => {
                 setSelectedColor(imageName.color);
                 console.log("imageName", imageName);
@@ -194,7 +183,7 @@ const AddOffice = ({ isOpen, onClose, onAddOffice }) => {
                   display: "block",
                   borderRadius: "50%",
                   border:
-                    selectedColor === imageName.value ? "3px solid black" : "",
+                    selectedColor === imageName.color ? "3px solid black" : "",
                 }} // Style to ensure the image fits within the grid item
               />
             </Grid>
