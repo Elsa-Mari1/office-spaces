@@ -8,7 +8,7 @@ import Office from "../components/Office";
 
 const RoutesFunc = () => {
   return (
-    <Router>
+    <Router basename="/office-spaces">
       <NavBar />
       <Routes>
         <Route exact path="/" element={<Home />} />
