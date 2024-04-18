@@ -131,11 +131,11 @@ const Office = () => {
         />
       </Grid>
       <Grid container item xs={12} alignItems="center">
-        <Grid item xs={10} display="inline-flex">
-          <Typography variant="h5">Staff Members In Office</Typography>
+        <Grid item xs={11} display="inline-flex">
+          <Typography variant="h6">Staff Members In Office</Typography>
         </Grid>
-        <Grid item xs={2} container justifyContent="flex-end">
-          <Typography variant="h5">{selectedCompany.members.length}</Typography>
+        <Grid item xs={1} container justifyContent="flex-end">
+          <Typography variant="h6">{selectedCompany.members.length}</Typography>
         </Grid>
       </Grid>
       {selectedCompany.members.map((member) => (
@@ -143,7 +143,7 @@ const Office = () => {
           {/* Left-aligned icons */}
           <Grid
             item
-            xs={10}
+            xs={11}
             sx={{
               display: "inline-flex",
               alignItems: "center",
@@ -152,11 +152,11 @@ const Office = () => {
             }}
           >
             <img src={member.icon} alt="members svg" />
-            <Typography variant="h7">{member.name}</Typography>
+            <Typography variant="h8">{member.name}</Typography>
           </Grid>
 
           {/* Right-aligned icons */}
-          <Grid item xs={2} container justifyContent="flex-end">
+          <Grid item xs={1} container justifyContent="flex-end">
             <MoreVertIcon
               sx={{ cursor: "pointer" }}
               onClick={() => {
