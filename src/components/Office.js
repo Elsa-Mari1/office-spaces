@@ -131,10 +131,10 @@ const Office = () => {
         />
       </Grid>
       <Grid container item xs={12} alignItems="center">
-        <Grid item xs={6} display="inline-flex">
+        <Grid item xs={10} display="inline-flex">
           <Typography variant="h5">Staff Members In Office</Typography>
         </Grid>
-        <Grid item xs={6} container justifyContent="flex-end">
+        <Grid item xs={2} container justifyContent="flex-end">
           <Typography variant="h5">{selectedCompany.members.length}</Typography>
         </Grid>
       </Grid>
@@ -143,7 +143,7 @@ const Office = () => {
           {/* Left-aligned icons */}
           <Grid
             item
-            xs={6}
+            xs={10}
             sx={{
               display: "inline-flex",
               alignItems: "center",
@@ -156,7 +156,7 @@ const Office = () => {
           </Grid>
 
           {/* Right-aligned icons */}
-          <Grid item xs={6} container justifyContent="flex-end">
+          <Grid item xs={2} container justifyContent="flex-end">
             <MoreVertIcon
               sx={{ cursor: "pointer" }}
               onClick={() => {
