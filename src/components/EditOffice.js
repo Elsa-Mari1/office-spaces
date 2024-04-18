@@ -235,8 +235,8 @@ const EditOffice = ({
             {Object.values(svgColors).map((imageName, index) => (
               <Grid
                 item
-                xs={10}
-                sm={8}
+                xs={3}
+                sm={3}
                 md={3}
                 lg={2}
                 key={index}
@@ -328,7 +328,7 @@ const EditOffice = ({
                 onClick={handleBackPage}
                 sx={{ cursor: "pointer" }}
               />
-              <Typography variant="h7">
+              <Typography variant="h5">
                 Are You Sure You Want To Delete Office?
               </Typography>
             </Grid>

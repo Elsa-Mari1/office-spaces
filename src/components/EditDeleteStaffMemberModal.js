@@ -232,7 +232,7 @@ const EditDeleteStaffMemberModal = ({
             <>
               <Grid container item xs={12}>
                 <Grid item xs={6} display="inline-flex">
-                  <Typography variant="h6">Edit Staff Member</Typography>
+                  <Typography variant="h7">Edit Staff Member</Typography>
                 </Grid>
                 <Grid item xs={6} container justifyContent="flex-end">
                   <HighlightOffIcon
@@ -341,8 +341,8 @@ const EditDeleteStaffMemberModal = ({
                 {Object.values(svgImages).map((imageName, index) => (
                   <Grid
                     item
-                    xs={10}
-                    sm={8}
+                    xs={3}
+                    sm={3}
                     md={3}
                     lg={3}
                     key={index}

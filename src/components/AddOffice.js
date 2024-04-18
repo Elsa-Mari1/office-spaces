@@ -164,8 +164,8 @@ const AddOffice = ({ isOpen, onClose, onAddOffice }) => {
           {Object.values(svgColors).map((imageName, index) => (
             <Grid
               item
-              xs={10}
-              sm={8}
+              xs={3}
+              sm={3}
               md={3}
               lg={2}
               key={index}
